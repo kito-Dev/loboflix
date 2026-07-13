@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #08080B; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+</style>
+</helmet>
+<div style="min-height:100vh; background:radial-gradient(circle at 50% 0%, #16161f, #08080B 70%); display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+
+  <!-- PHONE -->
+  <div style="width:390px; height:844px; background:#050507; border-radius:52px; border:1px solid #22222B; box-shadow:0 40px 120px rgba(0,0,0,0.7), inset 0 0 0 6px #000; position:relative; overflow:hidden;">
+
+    <!-- ambient backdrop glow -->
+    <div style="position:absolute; inset:0; background:linear-gradient(160deg,#1a2c3f 0%,#0d151f 45%,#050507 100%);"></div>
+    <div style="position:absolute; inset:0; background:radial-gradient(circle at 50% 28%, rgba(10,132,255,0.22), transparent 55%);"></div>
+
+    <!-- status bar -->
+    <div style="position:absolute; top:0; left:0; right:0; z-index:7; display:flex; align-items:center; justify-content:space-between; padding:16px 26px 0; color:#F4F3F1;">
+      <span style="font-family:'Hanken Grotesk'; font-size:15px; font-weight:700; letter-spacing:0.02em;">21:04</span>
+      <div style="display:flex; gap:7px; align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="#F4F3F1"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.4"/></svg>
+        <svg width="17" height="12" viewBox="0 0 24 18" fill="none" stroke="#F4F3F1" stroke-width="2"><path d="M2 6.5C7 2 17 2 22 6.5M5.5 10C9 7 15 7 18.5 10M9 13.5c1.8-1.5 4.2-1.5 6 0"/></svg>
+        <div style="width:24px; height:12px; border:1.5px solid #F4F3F1; border-radius:3px; padding:1.5px; display:flex;"><div style="flex:1; background:#F4F3F1; border-radius:1px;"></div></div>
+      </div>
+    </div>
+
+    <!-- top controls -->
+    <div style="position:absolute; top:52px; left:0; right:0; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:6px 22px 0;">
+      <div style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.08); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4F3F1" stroke-width="1.8"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div style="font-family:'JetBrains Mono'; font-size:11px; letter-spacing:0.14em; color:#9A99A0;">TRAILER</div>
+      <div style="width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.08); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4F3F1" stroke-width="1.7"><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/><circle cx="5" cy="12" r="1.6"/></svg></div>
+    </div>
+
+    <!-- VIDEO 16:9 -->
+    <div style="position:absolute; top:200px; left:0; right:0; z-index:2;">
+      <div style="position:relative; aspect-ratio:16/9; margin:0 14px; border-radius:18px; overflow:hidden; background:linear-gradient(135deg,#20344a,#0e1620); border:1px solid rgba(255,255,255,0.08); box-shadow:0 24px 60px rgba(0,0,0,0.6);">
+        <div style="position:absolute; inset:0; background:repeating-linear-gradient(118deg, rgba(255,255,255,0.02) 0 16px, transparent 16px 36px);"></div>
+        <div style="position:absolute; inset:0; background:radial-gradient(circle at 60% 40%, rgba(10,132,255,0.25), transparent 60%);"></div>
+        <!-- center play -->
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:60px; height:60px; border-radius:50%; background:rgba(8,8,11,0.4); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="#F4F3F1"><rect x="7" y="6" width="3.5" height="12" rx="1"/><rect x="13.5" y="6" width="3.5" height="12" rx="1"/></svg></div>
+        <!-- yt badge -->
+        <div style="position:absolute; bottom:10px; right:12px; display:flex; align-items:center; gap:5px; font-family:'JetBrains Mono'; font-size:9px; color:#F4F3F1; background:rgba(8,8,11,0.6); padding:3px 8px; border-radius:6px;"><span style="width:14px; height:10px; border-radius:2px; background:#E5615A; display:flex; align-items:center; justify-content:center;"><svg width="6" height="6" viewBox="0 0 24 24" fill="#fff"><path d="M8 6l10 6-10 6z"/></svg></span>YouTube</div>
+      </div>
+    </div>
+
+    <!-- INFO + CONTROLS -->
+    <div style="position:absolute; left:0; right:0; bottom:0; z-index:3; padding:0 28px 44px;">
+      <!-- title -->
+      <div style="margin-bottom:22px;">
+        <h1 style="font-family:'Space Grotesk'; font-size:27px; font-weight:600; letter-spacing:-0.02em; color:#F4F3F1;">Blade Runner 2049</h1>
+        <div style="font-size:13.5px; color:#9A99A0; margin-top:5px;">Trailer oficial · Warner Bros.</div>
+      </div>
+
+      <!-- progress -->
+      <div style="margin-bottom:20px;">
+        <div style="position:relative; height:5px; border-radius:999px; background:rgba(255,255,255,0.14);">
+          <div style="position:absolute; left:0; top:0; bottom:0; width:44%; border-radius:999px; background:#0A84FF;"></div>
+          <div style="position:absolute; left:44%; top:50%; transform:translate(-50%,-50%); width:15px; height:15px; border-radius:50%; background:#FBFAF7; box-shadow:0 2px 8px rgba(0,0,0,0.4);"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:9px; font-family:'JetBrains Mono'; font-size:12px; color:#9A99A0;">
+          <span>1:04</span><span>2:24</span>
+        </div>
+      </div>
+
+      <!-- transport -->
+      <div style="display:flex; align-items:center; justify-content:center; gap:36px; margin-bottom:26px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#C6C5CB"><path d="M11 6L4 12l7 6zM20 6l-7 6 7 6z"/></svg>
+        <div style="width:72px; height:72px; border-radius:50%; background:#F4F3F1; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(0,0,0,0.4);"><svg width="30" height="30" viewBox="0 0 24 24" fill="#08080B"><rect x="7" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg></div>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#C6C5CB"><path d="M13 6l7 6-7 6zM4 6l7 6-7 6z"/></svg>
+      </div>
+
+      <!-- bottom action row -->
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:9px; color:#9A99A0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A99A0" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4zM16 9a4 4 0 0 1 0 6"/></svg>
+          <div style="width:70px; height:4px; border-radius:999px; background:rgba(255,255,255,0.14);"><div style="width:60%; height:100%; border-radius:999px; background:#9A99A0;"></div></div>
+        </div>
+        <button style="display:flex; align-items:center; gap:8px; font-family:'Hanken Grotesk'; font-size:14px; font-weight:600; color:#08080B; background:#0A84FF; border:none; padding:11px 18px; border-radius:12px; cursor:pointer; box-shadow:0 8px 20px rgba(10,132,255,0.35);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#08080B" stroke-width="2"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M9 3v4M15 3v4"/></svg>Agendar</button>
+        <div style="color:#9A99A0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A99A0" stroke-width="1.7"><path d="M4 4h6v6M20 20h-6v-6M4 4l7 7M20 20l-7-7"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:924}}"></script>
+</body>
+</html>

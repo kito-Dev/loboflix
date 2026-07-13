@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #08080B; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+  .lbx-scroll::-webkit-scrollbar { display: none; }
+  .lbx-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes lbx-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+</style>
+</helmet>
+<div style="min-height:100vh; background:radial-gradient(circle at 50% 0%, #16161f, #08080B 70%); display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+
+  <!-- PHONE -->
+  <div style="width:390px; height:844px; background:#0B0B0E; border-radius:52px; border:1px solid #22222B; box-shadow:0 40px 120px rgba(0,0,0,0.7), inset 0 0 0 6px #000; position:relative; overflow:hidden;">
+
+    <!-- fixed header (status + title + search + chips) -->
+    <div style="position:absolute; top:0; left:0; right:0; z-index:5; background:linear-gradient(to bottom,#0B0B0E 82%,rgba(11,11,14,0.85) 96%,transparent); backdrop-filter:blur(6px); padding-bottom:14px;">
+      <!-- status bar -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 26px 10px; color:#F4F3F1;">
+        <span style="font-family:'Hanken Grotesk'; font-size:15px; font-weight:700; letter-spacing:0.02em;">21:04</span>
+        <div style="display:flex; gap:7px; align-items:center;">
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="#F4F3F1"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.4"/></svg>
+          <svg width="17" height="12" viewBox="0 0 24 18" fill="none" stroke="#F4F3F1" stroke-width="2"><path d="M2 6.5C7 2 17 2 22 6.5M5.5 10C9 7 15 7 18.5 10M9 13.5c1.8-1.5 4.2-1.5 6 0"/></svg>
+          <div style="width:24px; height:12px; border:1.5px solid #F4F3F1; border-radius:3px; padding:1.5px; display:flex;"><div style="flex:1; background:#F4F3F1; border-radius:1px;"></div></div>
+        </div>
+      </div>
+
+      <!-- title row -->
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; padding:6px 24px 14px;">
+        <div>
+          <div style="font-family:'JetBrains Mono'; font-size:11px; letter-spacing:0.14em; color:#0A84FF; margin-bottom:8px;">48 FILMES</div>
+          <h1 style="font-family:'Space Grotesk'; font-size:32px; font-weight:600; letter-spacing:-0.02em; color:#F4F3F1;">Biblioteca</h1>
+        </div>
+        <div style="width:40px; height:40px; border-radius:12px; background:#131317; border:1px solid #22222B; display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4F3F1" stroke-width="1.6"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+      </div>
+
+      <!-- search -->
+      <div style="padding:0 24px 12px;">
+        <div style="display:flex; align-items:center; gap:10px; background:#191920; border:1px solid #22222B; border-radius:14px; padding:13px 15px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <span style="flex:1; font-size:14px; color:#5A5A62;">Buscar na sua lista</span>
+        </div>
+      </div>
+
+      <!-- filter chips -->
+      <div class="lbx-scroll" style="display:flex; gap:9px; overflow-x:auto; padding:0 24px;">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+          <span style="flex-shrink:0; font-size:13px; font-weight:{{ c.weight }}; color:{{ c.color }}; background:{{ c.bg }}; border:1px solid {{ c.border }}; padding:8px 15px; border-radius:999px; white-space:nowrap;">{{ c.label }}</span>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- scrolling grid -->
+    <div class="lbx-scroll" style="position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; padding-top:274px;">
+      <div style="padding:8px 24px 130px;">
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px 11px;">
+          <sc-for list="{{ films }}" as="m" hint-placeholder-count="12">
+            <div>
+              <div style="aspect-ratio:2/3; border-radius:12px; background:{{ m.grad }}; border:1px solid rgba(255,255,255,0.07); position:relative; overflow:hidden;">
+                <div style="position:absolute; inset:0; background:repeating-linear-gradient(120deg,rgba(255,255,255,0.03) 0 10px,transparent 10px 22px);"></div>
+                <div style="position:absolute; top:7px; left:7px; display:flex; align-items:center; gap:3px; font-family:'JetBrains Mono'; font-size:9px; font-weight:500; color:#F4F3F1; background:rgba(8,8,11,0.55); backdrop-filter:blur(6px); padding:2px 6px; border-radius:5px;"><svg width="8" height="8" viewBox="0 0 24 24" fill="#E9A23B"><path d="M12 3l2.5 6 6.5.5-5 4.2 1.6 6.3L12 16.8 6.4 20l1.6-6.3-5-4.2 6.5-.5z"/></svg>{{ m.rating }}</div>
+                <div style="position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%; background:rgba(8,8,11,0.5); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center;">{{ m.badge }}</div>
+                <div style="position:absolute; left:0; right:0; bottom:0; height:4px; background:{{ m.statusBar }};"></div>
+              </div>
+              <div style="font-family:'Hanken Grotesk'; font-size:12.5px; font-weight:600; color:#F4F3F1; margin-top:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ m.title }}</div>
+              <div style="font-size:10.5px; color:#7A7A82; margin-top:1px;">{{ m.meta }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAB -->
+    <div style="position:absolute; right:22px; bottom:104px; width:58px; height:58px; border-radius:50%; background:linear-gradient(145deg,#0A84FF,#0055B8); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(10,132,255,0.45); animation:lbx-float 4s ease-in-out infinite; cursor:pointer;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FBFAF7" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+
+    <!-- TAB BAR -->
+    <div style="position:absolute; left:14px; right:14px; bottom:16px; background:rgba(19,19,23,0.72); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.08); border-radius:26px; padding:14px 10px 12px; display:flex; justify-content:space-around; box-shadow:0 12px 40px rgba(0,0,0,0.5);">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span style="font-size:10px; color:#7A7A82;">Início</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M9 3v4M15 3v4"/></svg><span style="font-size:10px; color:#7A7A82;">Agenda</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="#0A84FF"><rect x="4" y="4" width="6" height="16" rx="1"/><rect x="14" y="4" width="6" height="16" rx="1"/></svg><span style="font-size:10px; font-weight:600; color:#0A84FF;">Biblioteca</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span style="font-size:10px; color:#7A7A82;">Perfil</span></div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:924}}">
+class Component extends DCLogic {
+  renderVals() {
+    const sel = { label:'', weight:'600', color:'#08080B', bg:'#0A84FF', border:'#0A84FF' };
+    const un = { weight:'500', color:'#F4F3F1', bg:'#191920', border:'#22222B' };
+    const chips = [
+      { ...sel, label:'Todos' },
+      { ...un, label:'Não vistos' },
+      { ...un, label:'Drama' },
+      { ...un, label:'Ficção' },
+      { ...un, label:'Menos de 2h' },
+      { ...un, label:'Netflix' },
+    ];
+    const star = React.createElement('svg', { width:12, height:12, viewBox:'0 0 24 24', fill:'#0A84FF' }, React.createElement('path', { d:'M12 3l2.5 6 6.5.5-5 4.2 1.6 6.3L12 16.8 6.4 20l1.6-6.3-5-4.2 6.5-.5z' }));
+    const check = React.createElement('svg', { width:12, height:12, viewBox:'0 0 24 24', fill:'none', stroke:'#5FBE86', strokeWidth:2.4 }, React.createElement('path', { d:'M20 6L9 17l-5-5' }));
+    const plus = React.createElement('svg', { width:12, height:12, viewBox:'0 0 24 24', fill:'none', stroke:'#F4F3F1', strokeWidth:2 }, React.createElement('path', { d:'M12 5v14M5 12h14' }));
+    const mk = (title, meta, rating, grad, status) => ({
+      title, meta, rating, grad,
+      badge: status === 'watched' ? check : (status === 'scheduled' ? star : plus),
+      statusBar: status === 'watched' ? '#5FBE86' : (status === 'scheduled' ? '#0A84FF' : 'transparent'),
+    });
+    const films = [
+      mk('Blade Runner 2049','2017 · 2h44','8.0','linear-gradient(160deg,#1b2a3d,#0f1620)','scheduled'),
+      mk('Dune','2021 · 2h35','8.0','linear-gradient(160deg,#c69a5b,#5a3d1e)','watched'),
+      mk('Arrival','2016 · 1h56','7.9','linear-gradient(160deg,#334a45,#111815)','scheduled'),
+      mk('Oppenheimer','2023 · 3h00','8.3','linear-gradient(160deg,#3a4a63,#171c26)',''),
+      mk('Her','2013 · 2h06','8.0','linear-gradient(160deg,#5e3540,#1e1015)','watched'),
+      mk('Sicario','2015 · 2h01','7.6','linear-gradient(160deg,#4a3a2e,#181310)',''),
+      mk('Drive','2011 · 1h40','7.8','linear-gradient(160deg,#2d3a52,#0e131c)','watched'),
+      mk('The Batman','2022 · 2h56','7.8','linear-gradient(160deg,#2a2130,#0f0c14)',''),
+      mk('Interstellar','2014 · 2h49','8.7','linear-gradient(160deg,#243447,#0c1118)','scheduled'),
+      mk('Whiplash','2014 · 1h47','8.5','linear-gradient(160deg,#5c4420,#1c1409)','watched'),
+      mk('Prisoners','2013 · 2h33','8.2','linear-gradient(160deg,#2b3330,#101312)',''),
+      mk('The Gray Man','2022 · 2h02','6.5','linear-gradient(160deg,#3a3f45,#141619)',''),
+    ];
+    return { chips, films };
+  }
+}
+</script>
+</body>
+</html>

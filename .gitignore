@@ -1,0 +1,27 @@
+# Build
+**/bin/
+**/obj/
+**/wwwroot/
+*.db
+*.db-shm
+*.db-wal
+
+# Node
+web/node_modules/
+web/dist/
+
+# IDE / OS
+.vs/
+.idea/
+*.user
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+appsettings.Production.json
+appsettings.Development.json
+src/LoboFlix.Api/appsettings.Development.json
+
+# Logs
+*.log

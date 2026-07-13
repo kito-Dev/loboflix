@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #08080B; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+  .lbx-scroll::-webkit-scrollbar { display: none; }
+  .lbx-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes lbx-caret { 0%,49% { opacity:1; } 50%,100% { opacity:0; } }
+</style>
+</helmet>
+<div style="min-height:100vh; background:radial-gradient(circle at 50% 0%, #16161f, #08080B 70%); display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+
+  <!-- PHONE -->
+  <div style="width:390px; height:844px; background:#0B0B0E; border-radius:52px; border:1px solid #22222B; box-shadow:0 40px 120px rgba(0,0,0,0.7), inset 0 0 0 6px #000; position:relative; overflow:hidden;">
+
+    <!-- fixed header -->
+    <div style="position:absolute; top:0; left:0; right:0; z-index:5; background:#0B0B0E; padding-bottom:14px; border-bottom:1px solid #1C1C22;">
+      <!-- status bar -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 26px 10px; color:#F4F3F1;">
+        <span style="font-family:'Hanken Grotesk'; font-size:15px; font-weight:700; letter-spacing:0.02em;">21:04</span>
+        <div style="display:flex; gap:7px; align-items:center;">
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="#F4F3F1"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.4"/></svg>
+          <svg width="17" height="12" viewBox="0 0 24 18" fill="none" stroke="#F4F3F1" stroke-width="2"><path d="M2 6.5C7 2 17 2 22 6.5M5.5 10C9 7 15 7 18.5 10M9 13.5c1.8-1.5 4.2-1.5 6 0"/></svg>
+          <div style="width:24px; height:12px; border:1.5px solid #F4F3F1; border-radius:3px; padding:1.5px; display:flex;"><div style="flex:1; background:#F4F3F1; border-radius:1px;"></div></div>
+        </div>
+      </div>
+
+      <!-- title + cancel -->
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 20px 14px;">
+        <h1 style="font-family:'Space Grotesk'; font-size:26px; font-weight:600; letter-spacing:-0.02em; color:#F4F3F1;">Adicionar filme</h1>
+        <span style="font-size:15px; font-weight:600; color:#0A84FF;">Cancelar</span>
+      </div>
+
+      <!-- active search field -->
+      <div style="padding:0 20px;">
+        <div style="display:flex; align-items:center; gap:11px; background:#191920; border:1.5px solid #0A84FF; border-radius:14px; padding:13px 15px; box-shadow:0 0 0 3px rgba(10,132,255,0.18);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <span style="flex:1; font-size:15px; color:#F4F3F1;">Blade<span style="display:inline-block; width:2px; height:17px; background:#0A84FF; margin-left:1px; vertical-align:-3px; animation:lbx-caret 1s step-end infinite;"></span></span>
+          <div style="width:22px; height:22px; border-radius:50%; background:#2A2A33; display:flex; align-items:center; justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9A99A0" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- results -->
+    <div class="lbx-scroll" style="position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; padding-top:196px;">
+      <div style="padding:16px 20px 40px;">
+        <div style="font-family:'JetBrains Mono'; font-size:11px; letter-spacing:0.12em; color:#7A7A82; margin-bottom:12px;">4 RESULTADOS</div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <sc-for list="{{ results }}" as="m" hint-placeholder-count="4">
+            <div style="display:flex; gap:14px; align-items:center; background:#131317; border:1px solid {{ m.border }}; border-radius:16px; padding:12px;">
+              <div style="width:60px; height:90px; border-radius:9px; background:{{ m.grad }}; border:1px solid rgba(255,255,255,0.07); flex-shrink:0; position:relative; overflow:hidden;">
+                <div style="position:absolute; inset:0; background:repeating-linear-gradient(120deg,rgba(255,255,255,0.03) 0 9px,transparent 9px 20px);"></div>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-family:'Hanken Grotesk'; font-size:16px; font-weight:700; color:#F4F3F1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ m.title }}</div>
+                <div style="font-size:12.5px; color:#9A99A0; margin-top:3px;">{{ m.meta }}</div>
+                <div style="display:flex; gap:7px; margin-top:9px;">
+                  <span style="font-family:'JetBrains Mono'; font-size:11px; color:#E9A23B; background:rgba(233,162,59,0.12); padding:3px 8px; border-radius:6px;">★ {{ m.rating }}</span>
+                  <span style="font-size:11px; font-weight:500; color:#9A99A0; background:#191920; border:1px solid #22222B; padding:3px 9px; border-radius:6px;">{{ m.service }}</span>
+                </div>
+              </div>
+              {{ m.action }}
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- hint -->
+        <div style="display:flex; align-items:center; gap:10px; justify-content:center; margin-top:26px; padding:14px; border-radius:14px; background:rgba(10,132,255,0.06); border:1px solid rgba(10,132,255,0.16);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+          <span style="font-size:12.5px; color:#9A99A0;">Ao adicionar, encaixamos o filme numa noite livre.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:924}}">
+class Component extends DCLogic {
+  renderVals() {
+    const addBtn = React.createElement('button', {
+      style:{ width:44, height:44, borderRadius:12, background:'#0A84FF', border:'none', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, cursor:'pointer', boxShadow:'0 6px 16px rgba(10,132,255,0.4)' }
+    }, React.createElement('svg',{ width:20, height:20, viewBox:'0 0 24 24', fill:'none', stroke:'#FBFAF7', strokeWidth:2.2 }, React.createElement('path',{ d:'M12 5v14M5 12h14' })));
+    const addedBtn = React.createElement('div', {
+      style:{ width:44, height:44, borderRadius:12, background:'#191920', border:'1px solid #2A2A33', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }
+    }, React.createElement('svg',{ width:19, height:19, viewBox:'0 0 24 24', fill:'none', stroke:'#5FBE86', strokeWidth:2.4 }, React.createElement('path',{ d:'M20 6L9 17l-5-5' })));
+
+    const results = [
+      { title:'Blade Runner 2049', meta:'2017 · Ficção · 2h44', rating:'8.0', service:'Prime', grad:'linear-gradient(160deg,#1b2a3d,#0f1620)', border:'#22222B', action: addBtn },
+      { title:'Blade Runner', meta:'1982 · Ficção · 1h57', rating:'8.1', service:'Max', grad:'linear-gradient(160deg,#3a2a3d,#160f18)', border:'#22222B', action: addBtn },
+      { title:'Blade', meta:'1998 · Ação · 2h00', rating:'7.1', service:'Netflix', grad:'linear-gradient(160deg,#3a1f22,#140b0c)', border:'rgba(95,190,134,0.35)', action: addedBtn },
+      { title:'Blade II', meta:'2002 · Ação · 1h57', rating:'6.7', service:'Netflix', grad:'linear-gradient(160deg,#2b2426,#100d0e)', border:'#22222B', action: addBtn },
+    ];
+    return { results };
+  }
+}
+</script>
+</body>
+</html>

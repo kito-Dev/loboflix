@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #08080B; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+  .lbx-scroll::-webkit-scrollbar { display: none; }
+  .lbx-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes lbx-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+</style>
+</helmet>
+<div style="min-height:100vh; background:radial-gradient(circle at 50% 0%, #16161f, #08080B 70%); display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+
+  <!-- PHONE -->
+  <div style="width:390px; height:844px; background:#0B0B0E; border-radius:52px; border:1px solid #22222B; box-shadow:0 40px 120px rgba(0,0,0,0.7), inset 0 0 0 6px #000; position:relative; overflow:hidden;">
+
+    <!-- status bar -->
+    <div style="position:absolute; top:0; left:0; right:0; z-index:5; display:flex; align-items:center; justify-content:space-between; padding:16px 26px 12px; color:#F4F3F1; background:linear-gradient(to bottom,#0B0B0E 60%,transparent);">
+      <span style="font-family:'Hanken Grotesk'; font-size:15px; font-weight:700; letter-spacing:0.02em;">21:04</span>
+      <div style="display:flex; gap:7px; align-items:center;">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="#F4F3F1"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="4.5" width="3" height="7.5" rx="1"/><rect x="9" y="2" width="3" height="10" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1" opacity="0.4"/></svg>
+        <svg width="17" height="12" viewBox="0 0 24 18" fill="none" stroke="#F4F3F1" stroke-width="2"><path d="M2 6.5C7 2 17 2 22 6.5M5.5 10C9 7 15 7 18.5 10M9 13.5c1.8-1.5 4.2-1.5 6 0"/></svg>
+        <div style="width:24px; height:12px; border:1.5px solid #F4F3F1; border-radius:3px; padding:1.5px; display:flex;"><div style="flex:1; background:#F4F3F1; border-radius:1px;"></div></div>
+      </div>
+    </div>
+
+    <div class="lbx-scroll" style="position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; padding-top:52px;">
+
+      <!-- header row -->
+      <div style="display:flex; justify-content:flex-end; padding:8px 22px 0;">
+        <div style="width:40px; height:40px; border-radius:12px; background:#131317; border:1px solid #22222B; display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4F3F1" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg></div>
+      </div>
+
+      <!-- avatar + name -->
+      <div style="display:flex; flex-direction:column; align-items:center; padding:6px 24px 26px;">
+        <div style="width:92px; height:92px; border-radius:50%; background:linear-gradient(145deg,#0A84FF,#0055B8); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:600; font-size:34px; color:#FBFAF7; box-shadow:0 12px 32px rgba(10,132,255,0.4); margin-bottom:16px;">JA</div>
+        <h1 style="font-family:'Space Grotesk'; font-size:26px; font-weight:600; letter-spacing:-0.02em; color:#F4F3F1;">João Almeida</h1>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+          <span style="font-size:13px; color:#9A99A0;">Cinéfilo desde 2024</span>
+          <span style="font-family:'JetBrains Mono'; font-size:10px; font-weight:500; letter-spacing:0.06em; color:#0A84FF; background:rgba(10,132,255,0.14); padding:3px 8px; border-radius:6px;">PRO</span>
+        </div>
+      </div>
+
+      <!-- stats -->
+      <div style="padding:0 24px 24px;">
+        <div style="display:flex; gap:10px;">
+          <div style="flex:1; background:#131317; border:1px solid #1C1C22; border-radius:18px; padding:18px 0; text-align:center;">
+            <div style="font-family:'Space Grotesk'; font-size:26px; font-weight:600; color:#F4F3F1;">142</div>
+            <div style="font-size:11.5px; color:#7A7A82; margin-top:3px;">Filmes</div>
+          </div>
+          <div style="flex:1; background:#131317; border:1px solid #1C1C22; border-radius:18px; padding:18px 0; text-align:center;">
+            <div style="font-family:'Space Grotesk'; font-size:26px; font-weight:600; color:#F4F3F1;">318<span style="font-size:15px; color:#9A99A0;">h</span></div>
+            <div style="font-size:11.5px; color:#7A7A82; margin-top:3px;">Assistidas</div>
+          </div>
+          <div style="flex:1; background:#131317; border:1px solid #1C1C22; border-radius:18px; padding:18px 0; text-align:center;">
+            <div style="font-family:'Space Grotesk'; font-size:26px; font-weight:600; color:#0A84FF;">12</div>
+            <div style="font-size:11.5px; color:#7A7A82; margin-top:3px;">Dias seguidos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- taste summary -->
+      <div style="padding:0 24px 26px;">
+        <div style="font-family:'JetBrains Mono'; font-size:11px; letter-spacing:0.12em; color:#7A7A82; margin-bottom:14px;">SEU GOSTO</div>
+        <div style="background:#131317; border:1px solid #1C1C22; border-radius:18px; padding:20px;">
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <sc-for list="{{ genres }}" as="g" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:7px;">
+                  <span style="font-size:13.5px; font-weight:600; color:#F4F3F1;">{{ g.name }}</span>
+                  <span style="font-family:'JetBrains Mono'; font-size:12px; color:#9A99A0;">{{ g.pct }}</span>
+                </div>
+                <div style="height:7px; border-radius:999px; background:#22222B; overflow:hidden;"><div style="width:{{ g.pct }}; height:100%; background:{{ g.color }}; border-radius:999px;"></div></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- settings list -->
+      <div style="padding:0 24px 130px;">
+        <div style="font-family:'JetBrains Mono'; font-size:11px; letter-spacing:0.12em; color:#7A7A82; margin-bottom:14px;">CONFIGURAÇÕES</div>
+        <div style="background:#131317; border:1px solid #1C1C22; border-radius:18px; overflow:hidden;">
+
+          <div style="display:flex; align-items:center; gap:14px; padding:15px 16px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:#191920; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg></div>
+            <div style="flex:1;"><div style="font-size:14.5px; font-weight:600; color:#F4F3F1;">Agendar automaticamente</div><div style="font-size:12px; color:#7A7A82; margin-top:1px;">Preencher noites livres</div></div>
+            <div style="width:44px; height:26px; border-radius:999px; background:#0A84FF; position:relative;"><div style="position:absolute; top:2px; right:2px; width:22px; height:22px; border-radius:50%; background:#FBFAF7;"></div></div>
+          </div>
+          <div style="height:1px; background:#1C1C22; margin:0 16px;"></div>
+
+          <div style="display:flex; align-items:center; gap:14px; padding:15px 16px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:#191920; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A99A0" stroke-width="1.6"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+            <div style="flex:1;"><div style="font-size:14.5px; font-weight:600; color:#F4F3F1;">Lembretes</div><div style="font-size:12px; color:#7A7A82; margin-top:1px;">30 min antes de cada filme</div></div>
+            <div style="width:44px; height:26px; border-radius:999px; background:#0A84FF; position:relative;"><div style="position:absolute; top:2px; right:2px; width:22px; height:22px; border-radius:50%; background:#FBFAF7;"></div></div>
+          </div>
+          <div style="height:1px; background:#1C1C22; margin:0 16px;"></div>
+
+          <div style="display:flex; align-items:center; gap:14px; padding:15px 16px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:#191920; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A99A0" stroke-width="1.6"><path d="M12 3a9 9 0 1 0 9 9c-5 0-9-4-9-9z"/></svg></div>
+            <div style="flex:1;"><div style="font-size:14.5px; font-weight:600; color:#F4F3F1;">Aparência</div><div style="font-size:12px; color:#7A7A82; margin-top:1px;">Escuro</div></div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A5A62" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+          <div style="height:1px; background:#1C1C22; margin:0 16px;"></div>
+
+          <div style="display:flex; align-items:center; gap:14px; padding:15px 16px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:#191920; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A99A0" stroke-width="1.6"><path d="M4 5h11M4 12h11M4 19h7M17 8l4 4-4 4"/></svg></div>
+            <div style="flex:1;"><div style="font-size:14.5px; font-weight:600; color:#F4F3F1;">Serviços de streaming</div><div style="font-size:12px; color:#7A7A82; margin-top:1px;">4 conectados</div></div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A5A62" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+
+        <button style="width:100%; margin-top:14px; font-family:'Hanken Grotesk'; font-size:14.5px; font-weight:600; color:#E5615A; background:transparent; border:1px solid rgba(229,97,90,0.3); padding:14px; border-radius:14px; cursor:pointer;">Sair da conta</button>
+      </div>
+    </div>
+
+    <!-- TAB BAR -->
+    <div style="position:absolute; left:14px; right:14px; bottom:16px; background:rgba(19,19,23,0.72); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.08); border-radius:26px; padding:14px 10px 12px; display:flex; justify-content:space-around; box-shadow:0 12px 40px rgba(0,0,0,0.5);">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span style="font-size:10px; color:#7A7A82;">Início</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M9 3v4M15 3v4"/></svg><span style="font-size:10px; color:#7A7A82;">Agenda</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#7A7A82" stroke-width="1.6"><rect x="4" y="4" width="6" height="16" rx="1"/><rect x="14" y="4" width="6" height="16" rx="1"/></svg><span style="font-size:10px; color:#7A7A82;">Biblioteca</span></div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:5px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="#0A84FF"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6z"/></svg><span style="font-size:10px; font-weight:600; color:#0A84FF;">Perfil</span></div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:924}}">
+class Component extends DCLogic {
+  renderVals() {
+    const genres = [
+      { name:'Ficção científica', pct:'82%', color:'#0A84FF' },
+      { name:'Drama', pct:'64%', color:'#6AA6E0' },
+      { name:'Thriller', pct:'48%', color:'#5FBE86' },
+      { name:'Ação', pct:'31%', color:'#E9A23B' },
+    ];
+    return { genres };
+  }
+}
+</script>
+</body>
+</html>
