@@ -26,9 +26,18 @@ const DAY_OPTIONS = [
   { value: 7, label: 'Dom' },
 ];
 
+const WELCOME_STEP = 0;
+const ACCOUNT_STEP = 1;
+const SERVICES_STEP = 2;
+const GENRES_STEP = 3;
+const NIGHTS_STEP = 4;
+const DONE_STEP = 5;
+
+const PROGRESS_STEPS = [ACCOUNT_STEP, SERVICES_STEP, GENRES_STEP, NIGHTS_STEP];
+
 export function OnboardingPage() {
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(WELCOME_STEP);
   const [services, setServices] = useState<string[]>(['Netflix', 'Prime Video']);
   const [genres, setGenres] = useState<string[]>(['Drama', 'Ficção', 'Suspense']);
   const [nights, setNights] = useState(4);
@@ -37,6 +46,7 @@ export function OnboardingPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [authError, setAuthError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   function toggle(list: string[], value: string, setter: (next: string[]) => void) {
     setter(list.includes(value) ? list.filter((item) => item !== value) : [...list, value]);
@@ -48,38 +58,50 @@ export function OnboardingPage() {
     );
   }
 
-  async function finish(skipAuth = false) {
+  async function createAccount() {
+    if (!name.trim() || !email.trim() || !password) {
+      setAuthError('Preencha nome, email e senha.');
+      return;
+    }
+
+    setLoading(true);
+    setAuthError(null);
+    try {
+      const response = await api.register(email, password, name);
+      setToken(response.token);
+      setUser(response);
+      setStep(SERVICES_STEP);
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : 'Erro ao criar conta');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function finish() {
     saveUserPrefs({ services, genres, nightsPerWeek: nights, daysOfWeek: days });
     completeOnboarding({ services, genres, nightsPerWeek: nights, daysOfWeek: days });
 
-    if (!skipAuth && email && password && name) {
-      try {
-        const response = await api.register(email, password, name);
-        setToken(response.token);
-        setUser(response);
-        await syncScheduleConfigFromPrefs();
-        navigate('/');
-        return;
-      } catch (err) {
-        setAuthError(err instanceof Error ? err.message : 'Erro ao criar conta');
-        return;
-      }
+    try {
+      await syncScheduleConfigFromPrefs();
+    } catch {
+      /* preferências ficam salvas localmente mesmo se a sync falhar */
     }
 
-    navigate('/login');
+    navigate('/');
   }
 
   return (
     <main className="onboarding">
-      {step > 0 && step < 4 ? (
+      {PROGRESS_STEPS.includes(step) ? (
         <div className="onboarding-progress">
-          {[0, 1, 2, 3].map((index) => (
-            <span key={index} className={index < step ? 'active' : undefined} />
+          {PROGRESS_STEPS.map((value) => (
+            <span key={value} className={step >= value ? 'active' : undefined} />
           ))}
         </div>
       ) : null}
 
-      {step === 0 ? (
+      {step === WELCOME_STEP ? (
         <section className="onboarding-step onboarding-step--welcome">
           <Logo size={78} />
           <h1>
@@ -88,7 +110,7 @@ export function OnboardingPage() {
             assistir hoje?
           </h1>
           <p>O Loboflix organiza sua lista e monta o cronograma perfeito para suas noites livres.</p>
-          <button type="button" className="btn btn-hero btn-block" onClick={() => setStep(1)}>
+          <button type="button" className="btn btn-hero btn-block" onClick={() => setStep(ACCOUNT_STEP)}>
             Começar
           </button>
           <p className="onboarding-login">
@@ -97,7 +119,37 @@ export function OnboardingPage() {
         </section>
       ) : null}
 
-      {step === 1 ? (
+      {step === ACCOUNT_STEP ? (
+        <section className="onboarding-step">
+          <h2>
+            Crie sua
+            <br />
+            conta
+          </h2>
+          <p>Primeiro criamos seu perfil para salvar suas escolhas.</p>
+          <div className="form-field">
+            <label htmlFor="onb-name">Nome</label>
+            <input id="onb-name" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="form-field">
+            <label htmlFor="onb-email">Email</label>
+            <input id="onb-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="form-field">
+            <label htmlFor="onb-pass">Senha</label>
+            <input id="onb-pass" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          {authError ? <p className="form-error">{authError}</p> : null}
+          <button type="button" className="btn btn-primary btn-block" disabled={loading} onClick={createAccount}>
+            {loading ? 'Criando...' : 'Criar conta e continuar'}
+          </button>
+          <p className="onboarding-login">
+            Já tenho conta · <Link to="/login">Entrar</Link>
+          </p>
+        </section>
+      ) : null}
+
+      {step === SERVICES_STEP ? (
         <section className="onboarding-step">
           <h2>
             Onde você
@@ -122,13 +174,13 @@ export function OnboardingPage() {
               );
             })}
           </div>
-          <button type="button" className="btn btn-primary btn-block" onClick={() => setStep(2)}>
+          <button type="button" className="btn btn-primary btn-block" onClick={() => setStep(GENRES_STEP)}>
             Continuar
           </button>
         </section>
       ) : null}
 
-      {step === 2 ? (
+      {step === GENRES_STEP ? (
         <section className="onboarding-step">
           <h2>
             O que você
@@ -152,14 +204,14 @@ export function OnboardingPage() {
             type="button"
             className="btn btn-primary btn-block"
             disabled={genres.length < 3}
-            onClick={() => setStep(3)}
+            onClick={() => setStep(NIGHTS_STEP)}
           >
             Continuar
           </button>
         </section>
       ) : null}
 
-      {step === 3 ? (
+      {step === NIGHTS_STEP ? (
         <section className="onboarding-step">
           <h2>
             Quantas noites
@@ -188,35 +240,19 @@ export function OnboardingPage() {
               </button>
             ))}
           </div>
-          <button type="button" className="btn btn-primary btn-block" onClick={() => setStep(4)}>
+          <button type="button" className="btn btn-primary btn-block" onClick={() => setStep(DONE_STEP)}>
             Continuar
           </button>
         </section>
       ) : null}
 
-      {step === 4 ? (
+      {step === DONE_STEP ? (
         <section className="onboarding-step">
           <div className="onboarding-check">✓</div>
           <h2>Tudo pronto</h2>
-          <p>Sua semana está pronta. Crie sua conta para salvar tudo.</p>
-          <div className="form-field">
-            <label htmlFor="onb-name">Nome</label>
-            <input id="onb-name" value={name} onChange={(e) => setName(e.target.value)} />
-          </div>
-          <div className="form-field">
-            <label htmlFor="onb-email">Email</label>
-            <input id="onb-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div className="form-field">
-            <label htmlFor="onb-pass">Senha</label>
-            <input id="onb-pass" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          </div>
-          {authError ? <p className="form-error">{authError}</p> : null}
-          <button type="button" className="btn btn-primary btn-block" onClick={() => finish()}>
+          <p>Sua semana está pronta. Vamos começar!</p>
+          <button type="button" className="btn btn-primary btn-block" onClick={finish}>
             Entrar no Loboflix
-          </button>
-          <button type="button" className="btn btn-ghost btn-block" onClick={() => finish(true)}>
-            Pular por agora
           </button>
         </section>
       ) : null}

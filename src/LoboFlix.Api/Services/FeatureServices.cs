@@ -210,11 +210,13 @@ public class ScheduleEngine(AppDbContext db, MovieService movieService, IOptions
         var config = await EnsureConfigAsync(userId, ct);
         var pending = await GetPendingEntriesOrderedAsync(userId, ct);
         var index = pending.FindIndex(e => e.Id == entryId);
-        if (index < 0) return false;
 
+        // Entradas atrasadas (data no passado) não aparecem na lista de pendentes
+        // a partir de hoje. Nesse caso não há entradas "depois" para deslocar:
+        // apenas reagendamos o próprio filme para o próximo slot livre.
         var vacatedDate = entry.ScheduledDate;
-        var kept = pending.Take(index).ToList();
-        var after = pending.Skip(index + 1).ToList();
+        var kept = index >= 0 ? pending.Take(index).ToList() : pending.ToList();
+        var after = index >= 0 ? pending.Skip(index + 1).ToList() : new List<ScheduleEntry>();
 
         entry.Status = ScheduleStatus.Postponed;
 
