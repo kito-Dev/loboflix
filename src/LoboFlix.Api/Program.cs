@@ -94,6 +94,9 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -106,8 +109,6 @@ app.UseAuthorization();
 
 app.MapApiEndpoints();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
 app.MapFallbackToFile("index.html");
 
 app.Run();
