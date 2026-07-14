@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# .NET build outputs
+**/bin
+**/obj
+
+# Node
+web/node_modules
+web/dist
+
+# Front build output (regerado durante o build)
+src/LoboFlix.Api/wwwroot
+
+# Banco local SQLite (nunca subir dados locais)
+*.db
+*.db-shm
+*.db-wal
+
+# Secrets / config local
+.env
+**/appsettings.Development.json
+**/appsettings.Production.json
+
+# IDE / OS
+.vs
+.idea
+*.user
+.DS_Store
+Thumbs.db
+
+# Docs / design (não precisam no build da imagem)
+design-system
+README.md

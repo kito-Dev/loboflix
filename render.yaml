@@ -1,0 +1,37 @@
+# Blueprint do Render para o LoboFlix (API .NET + front React em um container).
+# No Render: New + -> Blueprint -> selecione este repositorio.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: loboflix
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    # Plano free: gratis, mas SEM disco persistente (o banco SQLite e apagado
+    # a cada deploy/restart). Para nao perder dados, troque para "starter" e
+    # descomente o bloco "disk" abaixo + ajuste a ConnectionStrings__Default.
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Preenchidas por voce no painel do Render (nao ficam no repo).
+      - key: Tmdb__ApiKey
+        sync: false
+      - key: OpenAi__ApiKey
+        sync: false
+      - key: Omdb__ApiKey
+        sync: false
+      # Segredo do JWT gerado automaticamente pelo Render (seguro e aleatorio).
+      - key: Jwt__Secret
+        generateValue: true
+      # Banco no diretorio padrao do app (efemero no plano free).
+      # Com disco persistente, troque para: Data Source=/app/data/loboflix.db
+      - key: ConnectionStrings__Default
+        value: Data Source=/app/loboflix.db
+
+    # --- Disco persistente (requer plano pago, ex: starter) ---
+    # Descomente para manter os dados entre deploys:
+    # disk:
+    #   name: loboflix-data
+    #   mountPath: /app/data
+    #   sizeGB: 1
