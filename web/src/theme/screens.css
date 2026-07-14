@@ -2037,6 +2037,12 @@
   margin-top: auto;
 }
 
+.onboarding-step--welcome .btn {
+  flex: none;
+  min-height: 54px;
+  margin-top: var(--space-6);
+}
+
 .onboarding .chip-wrap {
   margin: 24px 0 auto;
 }
